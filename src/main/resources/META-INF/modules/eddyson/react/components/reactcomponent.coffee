@@ -58,7 +58,12 @@ define ["react", "react-dom", "require", "t5/core/dom", "t5/core/events", "t5/co
   (module, clientId, parameters) ->
     element = document.getElementById clientId
     require [module], (componentClass)->
-      children = (convertNode c, "c#{idx}" for c, idx in element.childNodes)
+      # Isomorphic components need to be treated differently
+      if element.childNodes.length > 0 and element.childNodes[0].hasAttribute?('data-reactroot') 
+        children = null 
+      else 
+        children = (convertNode c, "c#{idx}" for c, idx in element.childNodes) 
+
       reactElement = React.createElement (if componentClass.__esModule then componentClass.default else componentClass), parameters, children
       reactComponent = ReactDOM.render reactElement, element
       elementsWithMountedComponents.push clientId

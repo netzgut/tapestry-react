@@ -14,6 +14,10 @@ public final class ReactSymbols {
 
   public static final String REACT_DOM_ASSET_PATH_PRODUCTION = "tapestry.react.react_dom_asset_path_production";
 
+  public static final String REACT_DOM_SERVER_ASSET_PATH = "tapestry.react.react_dom_server_asset_path";
+
+  public static final String REACT_DOM_SERVER_ASSET_PATH_PRODUCTION = "tapestry.react.react_dom_server_asset_path_production";
+
   public static final String PROP_TYPES_ASSET_PATH = "tapestry.react.prop_types_asset_path";
 
   public static final String PROP_TYPES_ASSET_PATH_PRODUCTION = "tapestry.react.prop_types_asset_path_production";

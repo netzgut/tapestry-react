@@ -41,11 +41,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import de.eddyson.tapestry.react.ReactSymbols;
+import de.eddyson.tapestry.react.isomorphic.services.ReactIsomorphicModule;
 import de.eddyson.tapestry.react.requestfilters.ReactAPIFilter;
 import de.eddyson.tapestry.react.services.CJSXCompiler;
 import de.eddyson.tapestry.react.services.impl.BabelResourceTransformer;
 
-@ImportModule(ReactCoreModule.class)
+@ImportModule({ ReactCoreModule.class, ReactIsomorphicModule.class })
 public final class ReactModule {
 
   private final static Logger logger = LoggerFactory.getLogger(ReactModule.class);
