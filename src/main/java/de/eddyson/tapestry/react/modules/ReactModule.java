@@ -43,7 +43,6 @@ import org.slf4j.LoggerFactory;
 import de.eddyson.tapestry.react.ReactSymbols;
 import de.eddyson.tapestry.react.isomorphic.services.ReactIsomorphicModule;
 import de.eddyson.tapestry.react.requestfilters.ReactAPIFilter;
-import de.eddyson.tapestry.react.services.CJSXCompiler;
 import de.eddyson.tapestry.react.services.impl.BabelResourceTransformer;
 
 @ImportModule({ ReactCoreModule.class, ReactIsomorphicModule.class })
@@ -61,8 +60,8 @@ public final class ReactModule {
       @Symbol(ReactSymbols.PROP_TYPES_ASSET_PATH) final String propTypesAssetPath,
       @Symbol(ReactSymbols.PROP_TYPES_ASSET_PATH_PRODUCTION) final String propTypesAssetPathProduction) {
 
-
-    configuration.add("react", new JavaScriptModuleConfiguration(assetSource.resourceForPath(productionMode ? reactAssetPathProduction : reactAssetPath)));
+    configuration.add("react", new JavaScriptModuleConfiguration(
+        assetSource.resourceForPath(productionMode ? reactAssetPathProduction : reactAssetPath)));
     configuration.add("react-dom", new JavaScriptModuleConfiguration(
         assetSource.resourceForPath(productionMode ? reactDomAssetPathProduction : reactDomAssetPath)));
     configuration.add("prop-types", new JavaScriptModuleConfiguration(
@@ -71,8 +70,7 @@ public final class ReactModule {
 
   @Contribute(StreamableResourceSource.class)
   public static void provideCompilers(final MappedConfiguration<String, ResourceTransformer> configuration,
-      final ResourceTransformerFactory factory, @Autobuild final CJSXCompiler cjsxCompiler,
-      @Autobuild final BabelResourceTransformer babelResourceTransformer) {
+      final ResourceTransformerFactory factory, @Autobuild final BabelResourceTransformer babelResourceTransformer) {
     // contribution ids are file extensions:
 
     // regular module with React support
@@ -84,9 +82,6 @@ public final class ReactModule {
     // ES6 module
     configuration.add("jsm", factory.createCompiler("text/javascript", "JSXM", "JavaScript", babelResourceTransformer,
         CacheMode.SINGLE_FILE));
-    // regular CoffeeScript module with React support
-    configuration.add("cjsx",
-        factory.createCompiler("text/javascript", "CJSX", "JavaScript", cjsxCompiler, CacheMode.SINGLE_FILE));
 
   }
 
@@ -98,10 +93,12 @@ public final class ReactModule {
   @FactoryDefaults
   @Contribute(SymbolProvider.class)
   public static void setupDefaultConfiguration(final MappedConfiguration<String, Object> configuration) {
-    configuration.add(ReactSymbols.REACT_ASSET_PATH, "classpath:de/eddyson/tapestry/react/services/react.development.js");
+    configuration.add(ReactSymbols.REACT_ASSET_PATH,
+        "classpath:de/eddyson/tapestry/react/services/react.development.js");
     configuration.add(ReactSymbols.REACT_ASSET_PATH_PRODUCTION,
         "classpath:de/eddyson/tapestry/react/services/react.production.min.js");
-    configuration.add(ReactSymbols.REACT_DOM_ASSET_PATH, "classpath:de/eddyson/tapestry/react/services/react-dom.development.js");
+    configuration.add(ReactSymbols.REACT_DOM_ASSET_PATH,
+        "classpath:de/eddyson/tapestry/react/services/react-dom.development.js");
     configuration.add(ReactSymbols.REACT_DOM_ASSET_PATH_PRODUCTION,
         "classpath:de/eddyson/tapestry/react/services/react-dom.production.min.js");
     configuration.add(ReactSymbols.PROP_TYPES_ASSET_PATH, "classpath:de/eddyson/tapestry/react/services/prop-types.js");

@@ -6,7 +6,7 @@ plugins {
 description = "Use React together with Tapestry"
 
 group = "de.eddyson"
-version = "0.31.0"
+version = "0.32.2"
 
 apply plugin: 'groovy'
 apply plugin: 'maven'
@@ -56,7 +56,6 @@ dependencies {
   testCompile "io.github.bonigarcia:webdrivermanager:1.7.2"
 
   testRuntime "org.slf4j:slf4j-simple:$versions.slf4j"
-  testRuntime 'org.objenesis:objenesis:2.5.1'
 }
 
 def compiledCoffeeScriptDir = "${project.buildDir}/compiled-coffeescript"
