@@ -30,7 +30,7 @@ public class ReactIsomorphicModule {
     configuration.add(ReactSymbols.REACT_DOM_SERVER_ASSET_PATH_PRODUCTION,
         "classpath:de/eddyson/tapestry/react/services/react-dom-server.browser.production.min.js");
   }
-  
+
   @Contribute(ModuleManager.class)
   public static void setupJSModules(final MappedConfiguration<String, JavaScriptModuleConfiguration> configuration,
       final AssetSource assetSource, @Symbol(SymbolConstants.PRODUCTION_MODE) final boolean productionMode,
